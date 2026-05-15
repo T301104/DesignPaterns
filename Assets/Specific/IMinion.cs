@@ -1,4 +1,4 @@
-
+using UnityEngine;
 using System;
 
 [Flags] public enum MinionType
@@ -17,5 +17,7 @@ public interface IMinion : IStateRunner
     void Mine();
     void Fight();
     void Research();
+    public void SetPosition(Vector3 position);
+
 }
 
