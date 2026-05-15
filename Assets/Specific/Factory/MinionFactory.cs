@@ -5,6 +5,7 @@ public class WorkerFactory : IFactory<Minion>
 	public Minion CreateAtPosition(Vector3 position)
 	{
 		var minion = new Minion(1, 0);
+		Minion.Instantiate(minion);
 		minion.SetPosition(position);
 		WorkerDecorator workerDecorator = new WorkerDecorator(3, 5);
 		IMinion minionInfo = minion.GetComponent<IMinion>();

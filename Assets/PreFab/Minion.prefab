@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4876296438097566229}
   - component: {fileID: 1117822107175926395}
   - component: {fileID: 1688158343514912155}
+  - component: {fileID: 5292831326916176371}
+  - component: {fileID: 442280457720433065}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -112,3 +114,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5292831326916176371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442030497225872020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d92cb14f72dcb44a22baceadf13f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Minion
+--- !u!114 &442280457720433065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442030497225872020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15bc9ddc8a5cd94ab998436a5d32c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DecoratorTest
