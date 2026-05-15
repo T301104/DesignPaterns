@@ -1,15 +1,13 @@
-namespace StateMachine
+
+public abstract class AState : IState
 {
-	public abstract class AState : IState
-	{
-		public StateEvent onSwitch { get; set; }
+	public StateEvent onSwitch { get; set; }
 
-		public void OnComplete(IStateRunner runner) {}
+	public virtual void OnComplete(IStateRunner runner) {}
 
-		public void OnFixedUpdate(IStateRunner runner){}
+	public virtual void OnFixedUpdate(IStateRunner runner){}
 
-		public void OnStart(IStateRunner runner){}
+	public virtual void OnStart(IStateRunner runner){}
 
-		public void OnUpdate(IStateRunner runner){}
-	}
+	public virtual void OnUpdate(IStateRunner runner){}
 }

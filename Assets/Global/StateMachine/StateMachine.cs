@@ -1,39 +1,38 @@
 using UnityEngine;
 
-namespace StateMachine
+
+public class StateMachine
 {
-    public class StateMachine
+    private IStateRunner owner;
+    private IState currentState;
+
+    public StateMachine (IStateRunner _owner)
     {
-        private IStateRunner owner;
-        private IState currentState;
+        owner = _owner;
+    }
 
-        public StateMachine (IStateRunner _owner)
+    public void Update()
+    {
+        currentState?.OnUpdate(owner);
+    }
+
+    public void FixedUpdate()
+    {
+       currentState?.OnFixedUpdate(owner);
+    }
+
+    public void SetState(IState newState)
+    {
+        if (currentState != null)
         {
-            owner = _owner;
+            currentState.OnComplete(owner);
+            currentState.onSwitch -= SetState;
         }
 
-        public void Update()
-        {
-            currentState?.OnUpdate(owner);
-        }
+        newState.OnStart(owner);
+        newState.onSwitch += SetState;
 
-        public void FixedUpdate()
-        {
-            currentState?.OnFixedUpdate(owner);
-        }
-
-        public void SetState (IState newState)
-        {
-            if (currentState != null)
-            {
-                currentState.OnComplete(owner);
-                currentState.onSwitch -= SetState;
-            }
-
-            newState.OnStart(owner);
-            newState.onSwitch += SetState;
-
-            currentState = newState;
-        }
+        currentState = newState;
     }
 }
+

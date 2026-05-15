@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class DecoratorTest : MonoBehaviour
 {
+	IMinion workerMinion = new Minion(1, 0);
+	IMinion workerFighterMinion = new Minion(1, 0);
+
+	StateMachine stateMachine;
 	private void Awake()
 	{
-		IMinion workerMinion = new Minion(1, 0);
-		IMinion workerFighterMinion = new Minion(1, 0);
+		stateMachine = new StateMachine(workerFighterMinion);
 
 		WorkerDecorator workerDecorator = new WorkerDecorator(3, 5);
 		workerMinion = workerDecorator.Decorate(workerMinion);
@@ -15,10 +18,13 @@ public class DecoratorTest : MonoBehaviour
 		WarriorDecorator warriorDecorator = new WarriorDecorator(10, 15);
 		workerFighterMinion = warriorDecorator.Decorate(workerFighterMinion);
 
-		workerMinion.Work();
-		workerFighterMinion.Work();
-		
+		stateMachine.SetState(new WorkingState(workerFighterMinion));
+
 		IMinion defaultMinion = new Minion(1, 0);
-		defaultMinion.Work();	
+	}
+
+	private void Update()
+	{
+		stateMachine.Update();
 	}
 }

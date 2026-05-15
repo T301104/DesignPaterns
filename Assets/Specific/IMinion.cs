@@ -9,10 +9,13 @@ using System;
     Scientist = 4
 }
 
-public interface IMinion
+public interface IMinion : IStateRunner
 {
-    int Hp {  get; set; }
+    int Hp { get; set; }
     int Strength { get; set; }
     MinionType Miniontypes { get; set; }
-    void Work();
+    void Mine();
+    void Fight();
+    void Research();
 }
+

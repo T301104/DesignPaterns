@@ -1,19 +1,33 @@
 using UnityEngine;
 
+
 public class Minion : IMinion
 {
 	public int Hp { get; set; }
 	public int Strength { get; set; }
 	public MinionType Miniontypes { get; set; } = MinionType.Default;
 	
-	public Minion (int hp, int str)
+	public Minion(int hp, int str)
 	{
 		Hp = hp;
 		Strength = str;
 	}
 
-	public void Work()
+	public void Mine()
 	{
-		Debug.Log(Miniontypes + " working hard with strength: " + Strength + " and Hp: " + Hp);
+		Debug.Log(Miniontypes + " Mining with strength: " + Strength + " and Hp: " + Hp);
+
+		if (Miniontypes.HasFlag(MinionType.Worker))
+		{
+			Debug.Log("Finding Gems!");
+		}
+	}
+
+	public void Fight()
+	{
+	}
+
+	public void Research()
+	{
 	}
 }
