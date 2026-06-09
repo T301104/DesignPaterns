@@ -4,19 +4,23 @@ using System;
 [Flags] public enum MinionType
 {
     Default = 0,
-    Worker = 1,
+    Miner = 1,
     Warrior = 2,
-    Scientist = 4
+    Farmer = 4
 }
 
 public interface IMinion : IStateRunner
 {
     int Hp { get; set; }
     int Strength { get; set; }
-    MinionType Miniontypes { get; set; }
+	int hunger { get; set; }
+
+	MinionType Miniontypes { get; set; }
+
     void Mine();
     void Fight();
-    void Research();
+    void Farm();
+    void Eat();
     public void SetPosition(Vector3 position);
 
 }

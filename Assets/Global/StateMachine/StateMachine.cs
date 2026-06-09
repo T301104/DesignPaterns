@@ -9,6 +9,14 @@ public class StateMachine
     public StateMachine (IStateRunner _owner)
     {
         owner = _owner;
+        GameManager.OnMinionUpdate += Update;
+        GameManager.OnFixedUpdate += FixedUpdate;
+    }
+
+    ~StateMachine()
+    {
+        GameManager.OnMinionUpdate -= Update;
+        GameManager.OnFixedUpdate -= FixedUpdate;
     }
 
     public void Update()

@@ -9,8 +9,8 @@ public class Spawner<T>
 		this.factory = factory;
 	}
 
-	public T SpawnAtPosition(Vector3 position)
+	public T SpawnAtPosition(Vector3 position, GameObject minionModel, params MinionDecorator[] decorators)
 	{
-		return factory.CreateAtPosition(position);
+		return factory.CreateAtPosition(position, minionModel, decorators);
 	}
 }

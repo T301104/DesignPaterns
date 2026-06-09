@@ -1,50 +1,64 @@
 using UnityEngine;
 
 
-public class Minion : MonoBehaviour, IMinion
+public class Minion : IMinion
 {
 	public int Hp { get; set; }
 	public int Strength { get; set; }
+	public int hunger { get; set; }
+	public GameObject minionObject;
 	public MinionType Miniontypes { get; set; } = MinionType.Default;
-	
-	public Minion(int hp, int str)
+	public StateMachine stateMachine;
+
+
+	public Minion(int hp, int str, GameObject objectRefrence)
 	{
 		Hp = hp;
 		Strength = str;
+		minionObject = objectRefrence;
+		stateMachine = new StateMachine(this);
+		stateMachine.SetState(new FarmingState(this));
+		hunger = 0;
 	}
 
 	public void SetPosition(Vector3 position)
 	{
-		//would set minionPosition
+		minionObject.transform.position = position;
+	}
+
+	public void Eat()
+	{
+		GameManager.Instance.MinionFoodChange(-hunger);
 	}
 
 	public void Mine()
 	{
-		Debug.Log(Miniontypes + " Mining with strength: " + Strength + " and Hp: " + Hp);
+		GameManager.Instance.ChangeMinerals(1);
 
-		if (Miniontypes.HasFlag(MinionType.Worker))
+		if (Miniontypes.HasFlag(MinionType.Miner) && Random.Range(0, 2) <= 1)
 		{
-			Debug.Log("Finding Gems!");
+			GameManager.Instance.ChangeMinerals(1);
+			GameManager.Instance.ChangeGems(1);
 		}
 	}
 
 	public void Fight()
 	{
-		Debug.Log(Miniontypes + " Fighting with strength: " + Strength + " and Hp: " + Hp);
+		GameManager.Instance.ChangeEnemys(-1);
 
 		if (Miniontypes.HasFlag(MinionType.Warrior))
 		{
-			Debug.Log("BIG ATTACK");
+			GameManager.Instance.ChangeEnemys(-2);
 		}
 	}
 
-	public void Research()
+	public void Farm()
 	{
-		Debug.Log(Miniontypes + " Researching with strength: " + Strength + " and Hp: " + Hp);
+		GameManager.Instance.MinionFoodChange(2);
 
-		if (Miniontypes.HasFlag(MinionType.Scientist))
+		if (Miniontypes.HasFlag(MinionType.Farmer))
 		{
-			Debug.Log("Ah yes, Quantum mechanics");
+			GameManager.Instance.MinionFoodChange(2);
 		}
 	}
 }

@@ -1,7 +1,14 @@
 
-public abstract class AState : IState
+public abstract class AState<T> : IState
 {
-	public StateEvent onSwitch { get; set; }
+	protected T owner;
+
+	protected AState(T owner)
+	{
+		this.owner = owner;
+	}
+
+	 public StateEvent onSwitch { get; set; }
 
 	public virtual void OnComplete(IStateRunner runner) {}
 
