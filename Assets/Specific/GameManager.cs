@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class GameManager : MonoBehaviour
 {
