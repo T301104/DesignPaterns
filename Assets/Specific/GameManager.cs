@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
@@ -117,7 +118,7 @@ public class GameManager : MonoBehaviour
 		Input.mousePosition.y, 8f));
 		Ray ray = new Ray(mousePos, -transform.up);
 
-		if (Physics.Raycast(ray, out RaycastHit hitInfo, 2f))
+		if (Physics.Raycast(ray, out RaycastHit hitInfo, 10f))
 		{
 			foreach (var key in objectMinionPairs.Keys)
 			{
@@ -135,6 +136,10 @@ public class GameManager : MonoBehaviour
 	{
 		food+= foodEaten;
 		foodText.text = "Food: " + food.ToString();
+		if (food < 0)
+		{
+			SceneManager.LoadScene("GameOverFood");
+		}
 	}
 
 	public void ChangeMinerals(int mineralsGained)
@@ -151,11 +156,11 @@ public class GameManager : MonoBehaviour
 
 	public void ChangeEnemyText()
 	{
-		enemyWarriorsText.text = "Enemys: " + enemys.ToString() + "\nIncreasing by: " + enemyIncreasingBy;
+		enemyWarriorsText.text = "Enemies: " + enemys.ToString() + "\nIncreasing by: " + enemyIncreasingBy;
 	}
 	public void ChangeEnemys(int enemysAdded)
 	{
-		if (enemys+enemysAdded !< 0)
+		if (enemys+enemysAdded >= 0)
 		{
 			enemys += enemysAdded;
 		}
@@ -167,6 +172,10 @@ public class GameManager : MonoBehaviour
 	{
 		playerHP -= enemys;
 		playerHPText.text = "HP: " + playerHP.ToString();
+		if (playerHP <= 0)
+		{
+			SceneManager.LoadScene("GameOverEnemies");
+		}
 	}
 	private void FixedUpdate()
 	{
